@@ -1,27 +1,4 @@
 #include <stdio.h>
-
-
-
-
-
-
-//////////////////////////////////////////////////////////////////////////
-
-
-////테스트 용 입니다. 
-
-
-/////제출용 코드는 simple_shell_yh.c 로 구성되어 있습니다. 
-
-
-
-//////////////////////////////////////////////////////////////////////
-
-
-
-
-
-
 #include <stdlib.h>
 #include <sys/wait.h>
 #include <time.h>
@@ -49,7 +26,7 @@ char* second_cmd=NULL;
 char* frarg=NULL;
 char* secarg=NULL;
 char* pip_arg=NULL;
-char history[100][100];
+
 
 
 void p_pwd();
@@ -62,12 +39,6 @@ int main(){
 	pid_t status;
 	char string_shell[BUFSIZ];
 	int fd[2];
-	int his_num=0;
-	int i=0;
-    signal(SIGINT,SIG_IGN);
-	signal(SIGQUIT,SIG_IGN);
-	signal(SIGTSTP,SIG_IGN);
-
 
 	while(1){
 		char* value = getenv("USER");
@@ -76,7 +47,6 @@ int main(){
 		printf("%s # [younghwan's shell] ",now_dir);
 
 		fgets(string_shell,BUFSIZ,stdin);
-		strcpy(history[his_num],string_shell);
 		tok_str(string_shell);
 		if (head == NULL){continue;}
 
@@ -96,18 +66,11 @@ int main(){
 
 
 
-		if (strcmp(head,"cd")==0){chdir(arg_1);his_num++;continue;}
-		else if(strcmp(head,"pwd")==0){p_pwd();his_num++;continue;}
-		else if(strcmp(head,"users")==0){printf("%s = %s\n",head,value);his_num++;continue;}
-		else if(strcmp(head,"time")==0){p_time();his_num++;continue;}
-		else if(strcmp(head,"exit")==0){printf("bye\n");his_num++;break;}
-		else if(strcmp(head,"history")==0){
-		for(i=0;i<his_num;i++){
-			printf("%s\n",history[i]);
-		}
-		his_num++;
-		continue;
-		}
+		if (strcmp(head,"cd")==0){chdir(arg_1);continue;}
+		else if(strcmp(head,"pwd")==0){p_pwd();continue;}
+		else if(strcmp(head,"users")==0){printf("%s = %s\n",head,value);continue;}
+		else if(strcmp(head,"time")==0){p_time();continue;}
+		else if(strcmp(head,"exit")==0){printf("bye\n");break;}
 
 		else if(pip_arg!=NULL && strcmp(pip_arg,"|")==0){
 			pipe(fd);
@@ -153,7 +116,7 @@ int main(){
 
 }
 
-his_num++;
+
 	}
 
 
