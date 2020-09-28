@@ -15,6 +15,7 @@ int main(int argc, char * argv[])
 	} else {
 		for (i = 0 ; i < argc-1 ; i++) {
 			ret = stat(argv[i+1], &fstat_buf);
+                        printf("%d\n",ret);
 			if (ret == -1) {
 				perror("stat");
 			}
