@@ -45,15 +45,16 @@ int main(int argc, char * argv[]) {
 
     while(1)  {
 
-
         cCount = 1;
         pCount = 1;    
 
-
-        if(argc <= 1) {		// When there is NO input command
+        //when there is NO input command
+        if(argc <= 1) {
 
             fgets(rawCommand, sizeof(rawCommand), stdin); 
-            if(strcmp(rawCommand, "\n") == 0) {				// check whether input is "\n"
+                
+                // check whether input is "\n"
+                if(strcmp(rawCommand, "\n") == 0) {			
 		while(1) {
                     printf("please type proper command! \n");
                     fgets(rawCommand, sizeof(rawCommand), stdin);
@@ -62,13 +63,11 @@ int main(int argc, char * argv[]) {
             }
 
             rawCommand[strlen(rawCommand) - 1] = '\0';
-            
-            //Parseing rawCommand to parsedCommand
-            ParsingCommand(rawCommand, restCommand, parsedCommand, cCount);    
+            ParsingCommand(rawCommand, restCommand, parsedCommand, cCount);    // Parsing rawCommand to parsedCommand
         }
-    
-        else {			// When there are input command
-
+        
+        //when there are input command
+        else {
             for (int i = 0; i < argc-1; i++) {
                 parsedCommand[i] = argv[i + 1];
             }       
@@ -77,14 +76,14 @@ int main(int argc, char * argv[]) {
     
 
         //Parseing rawPath to parsedPath and make tempArrayPath  
-        pCount = ParsingPath(copyPath, rawPath, restPath, parsedPath,Path, pCount, parsedCommand);
+        pCount = ParsingPath(copyPath, rawPath, restPath, parsedPath,Path, pCount, parsedCommand);     
 
         //Checking input command is "quit"
         result = CheckingQuit(parsedCommand);
         if(result == 1) break;    
 
-        pid = fork();
 
+        pid = fork();
 
         if(pid < 0) {
             perror("fork error occur!");
@@ -93,14 +92,8 @@ int main(int argc, char * argv[]) {
         
         else if (pid == 0) {      // child case
             for(int i = 1; i<pCount; i++) {
-                if(strcmp(parsedCommand[0], "cd") == 0) {
-                    chdir(parsedCommand[1]);
-                    break;
-                }
-                else{
-                    execve(Path[i], parsedCommand, NULL);
-               }
-            }
+                execve(Path[i], parsedCommand, NULL);
+             }
             exit(0);
         }
         
@@ -108,7 +101,6 @@ int main(int argc, char * argv[]) {
             wait(NULL);
             printf("--------------------------------------------------------------\n");
         }
-    
     }
     return 0;
 }
