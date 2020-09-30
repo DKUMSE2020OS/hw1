@@ -1,8 +1,8 @@
-#Build and Execute
+# Build and Execute
 
-** cd os/hw1
-** make
-** ./HW1_exe
+## cd os/hw1
+## make
+## ./HW1_exe
 
 
 # 2020_os_hw1
