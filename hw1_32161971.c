@@ -1,13 +1,3 @@
-//현재까지 구현
-//fork, while에서 quit으로 마무리
-//ls같은거 실행 시, 주소 하나씩 합쳐서 실행 가능한지 확인해보기
-//현재 주소 파악
-
-//구현이 필요한 내용
-//현재 directory 옮기기
-//vi print.c
-
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
