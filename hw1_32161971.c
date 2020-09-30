@@ -1,3 +1,10 @@
+/*
+2020 Operating Systems
+Homework #1. Simple MyShell
+Heejo Park, 32161971 (Mobile Systems Engineering)
+*/
+
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
